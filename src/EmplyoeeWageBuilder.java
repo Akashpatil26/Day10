@@ -1,14 +1,32 @@
 public class EmplyoeeWageBuilder {
+
     public static final int isPartTime=1;
     public static final int isFullTime=2;
+    private final String company;
+    private final int empRatePerHr;
+    private final int  numOfWorkingDays;
+    private final int maxHoursPerMonth ;
+    private int totalEmpWage;
+
     public static void main(String[] args) {
-        computeWage("FACEBOOK ",5,15,10);
-        computeWage("Google ",7,18,12);
+        EmplyoeeWageBuilder faceBook= new EmplyoeeWageBuilder("FACEBOOK ",20,2,10);
+        EmplyoeeWageBuilder google = new EmplyoeeWageBuilder("Google ",10,4,20);
+        faceBook.computeWage();
+        System.out.println(faceBook);
+        google.computeWage();
+        System.out.println(google);
 
     }
-    public static int computeWage( String company,int numOfWorkingDays,int maxHoursPerMonth,int empRatePerHr ){
+    public EmplyoeeWageBuilder(String company,int empRatePerHr,int numOfWorkingDays,int maxHoursPerMonth ){
+        this.company=company;
+        this.empRatePerHr=empRatePerHr;
+        this.numOfWorkingDays=numOfWorkingDays;
+        this.maxHoursPerMonth=maxHoursPerMonth;
+
+    }
+    public void computeWage(){
         int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
-        while(totalEmpHrs<=maxHoursPerMonth && totalWorkingDays< numOfWorkingDays) {
+        while(totalEmpHrs<=maxHoursPerMonth && totalWorkingDays < numOfWorkingDays) {
             totalWorkingDays++;
             int empCheck=(int) Math.floor(Math.random() * 10) % 3;
             switch (empCheck) {
@@ -21,12 +39,17 @@ public class EmplyoeeWageBuilder {
                 default:
                     empHrs=0;
             }
-            totalEmpHrs=totalEmpHrs + empHrs;
-            System.out.println("No of Days: " + totalWorkingDays + "Emplyoee hours: " + empHrs);
+            totalEmpHrs+=empHrs;
+            System.out.println("No of Days: " +totalWorkingDays+ " Emplyoee hours: " +empHrs);
         }
-        int totalEmpWage = totalEmpHrs * empRatePerHr;
-        System.out.println("Total Emplyoee Wage for company: "+company+ "is: "+totalEmpWage);
-        return totalEmpWage;
+        totalEmpWage = totalEmpHrs * empRatePerHr;
+
+    }
+
+    @Override
+    public String toString ()
+    {
+        return "Total Emplyoee Wage for company: " +company+ "is: " + totalEmpWage ;
     }
 
 
