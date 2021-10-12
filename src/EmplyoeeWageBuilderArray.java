@@ -1,4 +1,4 @@
-public class EmplyoeeWageBuilderArray {
+public class EmplyoeeWageBuilderArray implements IComputeEmpWage {
 
     public static final int isPartTime=1;
     public static final int isFullTime=2;
